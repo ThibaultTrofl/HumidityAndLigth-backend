@@ -2,6 +2,9 @@
 import express, { Application, Request, Response,Errback } from "express";
 async function postData(req: Request, res: Response) {
     try {
+        console.log("req -----------------")
+        console.log(req)
+        console.log("req ----------------- end")
         console.log("req.params")
         console.log(req.params)
         console.log("req.body");
