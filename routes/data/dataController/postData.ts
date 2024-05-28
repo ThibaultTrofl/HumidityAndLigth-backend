@@ -6,7 +6,7 @@ async function postData(req: Request, res: Response) {
         console.log(req.query);
         console.log(req.header);
 
-        return res.status(200);
+        return res.status(200).json({message:'Bien recu'});
     } catch (error) {
         // @ts-ignore
         console.log(error.message);
