@@ -35,7 +35,7 @@ sensorRouter.post(
 
 sensorRouter.get("/", async (req: Request, res: Response): Promise<void> => {
   try {
-    const allDataSensor: SensorDocument = await Sensor.getSensorData();
+    const allDataSensor: SensorDocument[] = await Sensor.getSensorData();
     res.status(200).json(allDataSensor);
   } catch (e) {
     console.error(e);
