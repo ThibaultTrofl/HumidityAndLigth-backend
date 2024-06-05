@@ -1,22 +1,22 @@
-import express, { Application, Request, Response } from "express";
-const app: Application = express();
+import express, { Request, Response } from "express";
+import { sensorRouter } from "./routes/sensors";
 
-app.use(express.urlencoded({ extended: true }));
+import { envVariables } from "./utils/envVariables";
+import { connectDB } from "./utils/connectDB";
+
+const app = express();
+
 app.use(express.json());
 
-const dataRoutes = require("./routes/data/data.route.ts");
-app.use(dataRoutes);
+app.use("/data", sensorRouter);
 
-app.get("/", (req: Request, res: Response) => {
-    res.json("Ok");
+
+app.get("/", (req: Request, res: Response): void => {
+    res.json("Humidity And Light");
 });
 
-app.get("*", (req: Request, res: Response) => {
-    res.status(404).json({ message: "Page not found 😢" });
-});
-
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT} 🚀`);
-});
+connectDB().then(() =>
+    app.listen(envVariables.PORT || 4001, (): void => {
+        console.log(`Server has started on PORT ${envVariables.PORT}!`);
+    }),
+);
