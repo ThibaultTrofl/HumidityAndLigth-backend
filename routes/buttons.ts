@@ -1,3 +1,4 @@
+// @ts-ignore
 import express, { Response, Request } from "express";
 import Sensor from "../models/Sensor";
 import { SensorDocument } from "../types/sensor";
