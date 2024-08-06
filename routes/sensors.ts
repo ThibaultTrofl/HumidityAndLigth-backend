@@ -18,6 +18,7 @@ sensorRouter.post(
   ): Promise<void> => {
     try {
       const { temperature, humidity, creationDate } = req.query;
+      console.log({ creationDate, temperature, humidity });
       const date = creationDate || new Date().getTime().toString();
 
       const newSensorData: SensorDocument = await Sensor.createSensorData({
