@@ -1,21 +1,11 @@
-# Utiliser une image Node.js officielle comme base
-FROM node:14
+FROM node:20-alpine as production
 
-# Créer un répertoire de travail
-WORKDIR /usr/app
+WORKDIR /app
 
-# Copier les fichiers de package et installer les dépendances
-COPY package*.json ./
-RUN npm install
+COPY package*.json .
 
-# Copier le reste des fichiers de l'application
-COPY . .
+RUN npm install --only=production
 
-# Compiler le TypeScript en JavaScript
-RUN npm run build
+COPY --from=development /app/dist ./dist
 
-# Exposer le port de l'application
-EXPOSE 3001
-
-# Démarrer l'application
-CMD [ "npm", "start" ]
+CMD ["node", "dist/index.js"]
