@@ -34,4 +34,4 @@ RUN npm install --only=production
 COPY --from=development /app/dist ./dist
 
 # On lance le serveur
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/server.js"]
